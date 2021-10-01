@@ -10,8 +10,6 @@ You will need the latest version of Python 3 (written in 3.9.5)
 Once that is installed, you will need to use pip to install some packages. These are pygame, ReadWriteMemory and sacn.
 USe the command prompt to cd into the Python folder (usually ~\AppData\Local\Programs\Python\Python39) and run ```python.exe -m pip install *PACKAGE NAME*```
 
-## Patching
-As far as I could tell, PhantomJester doesn't store the DMX output directly in memory, it only stores patched channels, and fixtures in order of their number, and channels in the order they appear on the monitor. Because of this, the fixture patching will need to be done in readDMX.py. Start by makining a patch constant up at the top. There are 2 sample ones already there, for the Martin MAC 250 Entour and Wash. Each index in the array is the values in order they are displayed on the monitor, and the values of each index are what DMX channel that index should map to. Then under the line patching the faders, you will need the following like for each fixture: ```dmx, counter = getValues(dmx, memory, *DMX ADDRESS*, *PATCH CONSTANT*, counter)```. I recommend you include comments before each patch signifying which fixture they are for.
 
 ## Running
-When using this software, run PhantomJester with a JesterML desk running first, otherwise this program will crash. Then run this program by running pygameDisplay.py. This will display a visualisation of the DMX universe in a Pygame window. Moving the mouse will show which channel and the white rectangles show the values of that channel.
+To run just run one of the 2 main programs. basic.py is the barebones for the program to function and just runs from the console. main.py has a Pygame-powered GUI to visualise the live DMX output which may be helpful in some situations.

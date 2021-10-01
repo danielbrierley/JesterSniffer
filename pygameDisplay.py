@@ -2,10 +2,13 @@ import pygame, os, sys
 from pygame.locals import *
 import readDMX
 import sendsacn
+import patching
+import time
 
 #Init Modules
 pygame.init()
-screen = pygame.display.set_mode((1280,1024))
+screen = pygame.display.set_mode((1280,1020))
+pygame.display.set_caption('')
 readDMX.init()
 sendsacn.init()
 
@@ -14,6 +17,11 @@ BLACK = (0,0,0)
 WHITE = (255,255,255)
 LGREY = (200,200,200)
 DGREY = (50,50,50)
+DRED = (150,0,0)
+
+
+font = pygame.font.Font(None, 100)
+extraPatch = True
 
 def main():
     #main loop
@@ -22,26 +30,47 @@ def main():
         checkForEvent()
 
 def drawScreen():
-    #get dmx array
-    dmx = readDMX.getDMX()
-    #send dmx array through sacn (to capture)
-    sendsacn.send(dmx)
-
-    #Visualise DMX in Pygame window
     screen.fill(BLACK)
-    highlightedY = pygame.mouse.get_pos()[1]//255
-    highlightedX = pygame.mouse.get_pos()[0]//10+1
-    for y in range(4):
-        for x in range(128):
-            if y == highlightedY and x == highlightedX-1:
-                col = LGREY
-                pygame.draw.rect(screen, DGREY, (x*10, y*255, 10, 255))
-            else:
-                col = WHITE
-            pygame.draw.rect(screen, col, (x*10, (y*255)+(255-dmx[y*128+x]), 10, dmx[y*128+x]))
-    font = pygame.font.Font(None, 100)
-    text = font.render(str(highlightedX+128*highlightedY), True,LGREY)
-    screen.blit(text, (0,0))
+    if readDMX.connected:
+        #get dmx array from PhantomJester
+        dmx = readDMX.getDMX()
+
+        unpatchedDmx = list(dmx)
+
+        if extraPatch:
+            dmx = patching.patch(dmx)
+        #send dmx array through sacn (to capture)
+        sendsacn.send(dmx)
+
+        
+        dmx = unpatchedDmx
+
+        #Visualise DMX in Pygame window
+        highlightedY = pygame.mouse.get_pos()[1]//255
+        highlightedX = pygame.mouse.get_pos()[0]//10+1
+        for y in range(4):
+            for x in range(128):
+                if not readDMX.patched[y*128+x]:
+                    pygame.draw.rect(screen, DRED, (x*10, y*255, 10, 255))
+                if y == highlightedY and x == highlightedX-1:
+                    col = LGREY
+                    pygame.draw.rect(screen, DGREY, (x*10, y*255, 10, 255))
+                else:
+                    col = WHITE
+                pygame.draw.rect(screen, col, (x*10, (y*255)+(255-dmx[y*128+x]), 10, dmx[y*128+x]))
+        text = font.render(str(highlightedX+128*highlightedY), True,LGREY)
+        screen.blit(text, (0,0))
+        try:
+            text = font.render(readDMX.desk+' v'+readDMX.version, True,LGREY)
+            screen.blit(text, (10,924))
+        except:
+            pass
+
+    else:
+        dmx = [0 for x in range(512)]
+        text = font.render('Waiting for PhantomJester', True,LGREY)
+        screen.blit(text, (10,924))
+        readDMX.init()
     pygame.display.update()
 
 def close():
@@ -52,6 +81,7 @@ def close():
     sys.exit()
 
 def checkForEvent():
+    global extraPatch
     #Check for key inputs
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -63,7 +93,7 @@ def checkForEvent():
                 #Restart connection to PhantomJester
                 readDMX.init()
             if event.key == K_F4:
-                readDMX.ALTWASH = not readDMX.ALTWASH
+                extraPatch = not extraPatch
 
 if __name__ == '__main__':
     main()
