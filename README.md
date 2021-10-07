@@ -7,8 +7,8 @@ PhantomJester is a piece of software designed to emulate the Jester range of des
 
 ## Dependancies
 You will need the latest version of Python 3 (written in 3.9.5)
-Once that is installed, you will need to use pip to install some packages. These are pygame, ReadWriteMemory and sacn.
-USe the command prompt to cd into the Python folder (usually ~\AppData\Local\Programs\Python\Python39) and run ```python.exe -m pip install *PACKAGE NAME*```
+Once that is installed, you will need to use pip to install some packages.
+Install them with `python -m pip install -r requirements.txt`
 
 
 ## Running
