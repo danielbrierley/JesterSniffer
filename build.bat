@@ -1,0 +1,2 @@
+pyinstaller --noconfirm --onefile --windowed --icon "ico/jestersniffer_c48_icon.ico" --add-data "jestersniffer.png;."  "main.py"
+pyinstaller --noconfirm --onefile --console --icon "ico/jestersniffer_c48_icon.ico" "basic.py"

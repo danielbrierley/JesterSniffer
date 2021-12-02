@@ -5,10 +5,27 @@ import sendsacn
 import patching
 import time
 
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+
 #Init Modules
 pygame.init()
 screen = pygame.display.set_mode((1280,1020))
-pygame.display.set_caption('')
+pygame.display.set_caption('JesterSniffer')
+file = resource_path('jestersniffer.png')
+icon = pygame.image.load(file)
+pygame.display.set_icon(icon)
+
+
 readDMX.init()
 sendsacn.init()
 
@@ -20,7 +37,7 @@ DGREY = (50,50,50)
 DRED = (150,0,0)
 
 
-font = pygame.font.Font(None, 100)
+font = pygame.font.SysFont('Sans', 100)
 extraPatch = True
 
 def main():
