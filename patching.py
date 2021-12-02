@@ -4,8 +4,8 @@ def patch(dmx):
     # Ideal for repatching one fixture to an equivalent one that is useable in Capture Student Edition
     # e.g. Mac 250 Wash to ColorWash 1200 E AT
 
-    dmx = convWash(dmx,103)
-    dmx = convWash(dmx,200)
+    #dmx = convWash(dmx,103)
+    #dmx = convWash(dmx,200)
 
     return dmx
 
