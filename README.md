@@ -6,7 +6,7 @@ This software directly reads the memory of PhantomJester v4.1 or v2.1, capturing
 PhantomJester is a piece of software designed to emulate the Jester range of desks by Zero88 (https://zero88.com/control/jester). it is available for download at https://zero88.com/storage/downloads/c931e8d3-b5c4-471f-9ef2-23503c964603/phantom-jester-4.1.zip. 
 
 ## Requirements
-This software was developed and tested on Windows 10. It may also work on earlier versions, but I haven't tested. It does not currently seem to work in Windows 11. While PhantomJester on it's own works in WINE on Linux, at this time JesterSniffer does not due to the python module psutil not being compatible. 
+This software was developed and tested on Windows 10. It has also been tested and is working on 7, 8.1 and 11, though the binaries are not compatible with 7. While PhantomJester on it's own works in WINE on Linux, at this time JesterSniffer does not due to the python module psutil not being compatible. 
 It also requires PhantomJester v2.1 or v4.1. I would be open to expanding this to more versions but don't currently have access to any more.
 
 ## Running
