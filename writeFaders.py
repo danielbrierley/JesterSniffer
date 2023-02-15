@@ -61,6 +61,7 @@ def setFader(faderID, value):
         process.write(0x004629A8+faderID-24, value, 1)
 
 def pressButton(buttonID, channel=0):
+    # print(buttonID)
     if buttonID == 'all':
         for x in buttons:
             button = buttons[x]
@@ -71,6 +72,7 @@ def pressButton(buttonID, channel=0):
         process.write(0x00462C5A+channel-24, 1, 1)
     else:
         button = buttons[buttonID]
+        # print(hex(0x00462B00+button))
         process.write(0x00462B00+button, 1, 1)
 
 def releaseButton(buttonID, channel=0):
@@ -96,14 +98,14 @@ if __name__ == '__main__':
         setFader(x, 0)
         # setFader(x, int(127*math.sin(x/2))+128)
     
-    for x in range(48):
-        pressButton('flash', x)
-        time.sleep(0.2)
-        releaseButton('flash', x)
+    # for x in range(48):
+    #     pressButton('flash', x)
+    #     time.sleep(0.2)
+    #     releaseButton('flash', x)
         
-    # pressButton('all')
-    # time.sleep(0.1)
-    # releaseButton('all')
+    pressButton('go')
+    time.sleep(0.1)
+    releaseButton('go')
         #process.read(0x004629A8+x) & 255
     #for x in range(24):
     #    if dmx[x] == oldDmx[x]:
