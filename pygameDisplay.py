@@ -45,6 +45,7 @@ def main():
     while True:
         drawScreen()
         checkForEvent()
+        time.sleep(0.001)
 
 def drawScreen():
     screen.fill(BLACK)

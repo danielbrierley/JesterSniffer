@@ -5,7 +5,7 @@ import patching
 run = True
 waiting = False
 readDMX.init()
-sendsacn.init()
+# sendsacn.init()
 extraPatch = True
 
 print('Waiting for PhantomJester...')
@@ -22,10 +22,10 @@ try:
             dmx = readDMX.getDMX()
             if extraPatch:
                 dmx  = patching.patch(dmx)
-            sendsacn.send(dmx)
+            # sendsacn.send(dmx)
         else:
             readDMX.init()
 except KeyboardInterrupt:
     print('Quitting...')
     readDMX.quit()
-    sendsacn.quit()
+    # sendsacn.quit()
