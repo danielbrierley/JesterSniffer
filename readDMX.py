@@ -17,11 +17,11 @@ def getDeskDLL(pid):
             dlls.append(dll)
             if dll == 'Jester.dll' or dll == 'JesterML.dll':
                 desk = dll
-                break
+                break   
     return desk
 
 def getVersion(pid):
-    p = psutil.Process(pid).memory_maps()[0].path
+    p = psutil.Process(pid).exe()
     info = win32api.GetFileVersionInfo(p, '\\')
     versionRaw = '%s.%s.%s.%s' % (
         info['FileVersionMS'] >> 16,
@@ -32,6 +32,7 @@ def getVersion(pid):
         version = '2.1'
     elif versionRaw == '1.0.0.1':
         version = '4.1'
+    #print(version)
     return version
     
 def loadDeskConfig():
@@ -79,6 +80,7 @@ def init():
             if desk:
                 try:
                     loadDeskConfig()
+                    print("Loading Desk Config")
                 except:
                     pass
                 else:
@@ -93,6 +95,7 @@ def getDMX():
     patching, patched = getPatching()
     if getDeskDLL(process.pid):
         memory = getMemory()
+        #print(memory)
         dmx = [0 for x in range(512)]
         #Patching
         for x in range(512):
@@ -110,6 +113,7 @@ def getPatching():
         for x in range(512):
             patching[x] = process.read(dmxPatchPointer+(x*2)) & 511
             patched[x] = process.read(dmxPatchPointer+(x*2)+1) & 255
+        #print("patched")
     else:
         for x in range(512):
             value = process.read(dmxPatchPointer+x) & 255
@@ -119,6 +123,7 @@ def getPatching():
             else:
                 patched[x] = True
             patching[x] = value
+    #print(patching)
     return patching, patched
 
 def getMemory():
@@ -126,8 +131,9 @@ def getMemory():
     memory = [0 for x in range(memRange)]
     for x in range(memRange):
         memory[x] = process.read(dmxPointer+x) & 255
+        #print(x)
     return memory
 
 if __name__ == '__main__':
-    import pygameDisplay
-    pygameDisplay.main()
+    import basic
+    #pygameDisplay.main()

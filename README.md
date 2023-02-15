@@ -3,7 +3,11 @@
 This software directly reads the memory of PhantomJester v4.1 or v2.1, capturing what would be the DMX output of the desk. It then outputs this data through the sACN DMX protocol. It was originally written for visualising the output in Capture 2021, but is designed in a way that the sending routine can be easily modified and replaced with an alternative.
 
 ## PhantomJester
-PhantomJester is a piece of software designed to emulate the Jester range of desks by Zero88 (https://zero88.com/control/jester). it is available for download at https://zero88.com/storage/downloads/c931e8d3-b5c4-471f-9ef2-23503c964603/phantom-jester-4.1.zip. While PhantomJester on it's own works in WINE on Linux, at this time JesterSniffer does not due to the module psutil not being compatible. 
+PhantomJester is a piece of software designed to emulate the Jester range of desks by Zero88 (https://zero88.com/control/jester). it is available for download at https://zero88.com/storage/downloads/c931e8d3-b5c4-471f-9ef2-23503c964603/phantom-jester-4.1.zip. 
+
+## Requirements
+This software was developed and tested on Windows 10. It has also been tested and is working on 7, 8.1 and 11, though the binaries are not compatible with 7. While PhantomJester on it's own works in WINE on Linux, at this time JesterSniffer does not due to the python module psutil not being compatible. 
+It also requires PhantomJester v2.1 or v4.1. I would be open to expanding this to more versions but don't currently have access to any more.
 
 ## Running
 To run the program open the latest release in the tab on the right and choose between main.exe or basic.exe. main.exe is a version with a Pygame-powered GUI, visualising the DMX output from the desk, and showing messages with the status of the program. basic.exe is a version without a GUI, but instead opens a Terminal window with just the status messages.
