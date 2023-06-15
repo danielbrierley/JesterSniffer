@@ -1,5 +1,5 @@
 pygame
 sacn
-ReadWriteMemory
+ReadWriteMemory=0.1.5
 psutil
 pywin32

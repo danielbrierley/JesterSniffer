@@ -37,7 +37,8 @@ for k in range(2):
 keyboard.on_press_key('space', func(press, 'go'), suppress=False)
 keyboard.on_release_key('space', func(release,'go'), suppress=False)
 
-keyboard.wait()
+if __name__ == '__main__':
+    keyboard.wait()
 
 # while True:
 #     event = keyboard.read_event()
