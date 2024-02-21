@@ -10,7 +10,7 @@ This software was developed and tested on Windows 10. It has also been tested an
 It also requires PhantomJester v2.1 or v4.1. I would be open to expanding this to more versions but don't currently have access to any more.
 
 ## Running
-To run the program open the latest release in the tab on the right and choose between main.exe or basic.exe. main.exe is a version with a Pygame-powered GUI, visualising the DMX output from the desk, and showing messages with the status of the program. basic.exe is a version without a GUI, but instead opens a Terminal window with just the status messages.\
+To run the program open the latest release in the tab on the right and choose between main.exe or basic.exe. main.exe is a version with a Pygame-powered GUI, visualising the DMX output from the desk, and showing messages with the status of the program. basic.exe is a version without a GUI, but instead opens a Terminal window with just the status messages.
 
 ## Source Code
 The source for this program was designed in a way that makes it easy to modify one particulat bit, whether it's the input, output, some tasks in-between or the whole thing
