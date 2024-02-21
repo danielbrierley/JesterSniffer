@@ -22,8 +22,11 @@ Install them with `python -m pip install -r requirements.txt`
 
 ### Modifications
 The main loops for main.exe and basic.exe are in pygameDisplay.py and basic.py respecively.\
+\
 readDMX.py is the script that inputs the DMX Output from the desk. getDMX() is run at the start of the loop\
+\
 sendsacn.py is the script that outputs the DMX signal through the sACN protocol (a server-based DMX protocol). It is broadcasted on Universe 1 and should be detected automatically by Capture 2021. send() is run at the end of the loop\
+\
 patching.py is an extra script that isn't needed, but patch() is run between the input and the output. The main purpose is so that you can modify the DMX signal between the desk and the sACN server, so that if you use the Student edition of Capture where not all fixtures are available, you can use an alternate fixture and modify the patching on-the-fly from one fixture to another. The current code in the script is to convert a MAC 250 Wash to a ColorWash 1200E AT
 
 ### Running
